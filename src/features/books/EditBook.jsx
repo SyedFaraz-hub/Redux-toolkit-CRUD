@@ -6,15 +6,15 @@ import { updateBook } from "../../store/reducers/BooksSlice";
 const EditBook = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  console.log(location.state);
   const [id] = useState(location.state.id);
   const [title, setTitle] = useState(location.state.title);
   const [author, setAuthor] = useState(location.state.author);
+  const [describtion, setDescribtion] = useState(location.state.describtion);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateBook({ id, title, author }));
+    dispatch(updateBook({ id, title, author, describtion }));
     navigate("/", { replace: true });
   };
   return (
@@ -56,11 +56,24 @@ const EditBook = () => {
             required
           />
         </div>
+        <div className="mb-3">
+          <label htmlFor="describtion" className="form-label">
+            Describtion:
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="describtion"
+            value={describtion}
+            onChange={(e) => setDescribtion(e.target.value)}
+            required
+          />
+        </div>
 
         <button
           type="submit"
-          className="btn "
-          style={{ background: "#006877", color: "white" }}
+          className="btn btn-primary"
+          style={{ color: "white" }}
         >
           Update Book
         </button>
