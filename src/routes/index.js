@@ -6,20 +6,27 @@ import EditBook from "../features/books/EditBook";
 // import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
 import Error from "../pages/Error";
-import Home from "../pages/Home";
+import PrivateRoute from "./PrivateRoute";
+import Login from "../features/Login/Login";
 
 const Index = () => {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
+        {/* public routes */}
         <Route path="/" element={<BooksView />} />
-        <Route path="/add-book" element={<AddBook />} />
-        <Route path="/edit-book" element={<EditBook />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<Error />} />
 
-        {/* make a protected route for AddBook */}
+        {/* private routes */}
+        <Route exact path="/add-book" element={<PrivateRoute />}>
+          <Route exact path="/add-book" element={<AddBook />} />
+        </Route>
+
+        <Route exact path="/edit-book" element={<PrivateRoute />}>
+          <Route exact path="/edit-book" element={<EditBook />} />
+        </Route>
       </Routes>
       {/* <Footer /> */}
     </BrowserRouter>

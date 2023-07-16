@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { deleteBook } from "../../store/reducers/BooksSlice";
 import { Link } from "react-router-dom";
 import { logout } from "../../store/reducers/authenticationSlice";
@@ -33,6 +32,7 @@ const BooksView = () => {
 
   return (
     <>
+      {console.log("books", books)}
       <div className="vh-100 ">
         <div className="container ">
           <br />
@@ -53,8 +53,18 @@ const BooksView = () => {
             </div>
           )}
 
+          {!isAuthenticated && (
+            <div className="text-center ">
+              <Link to="/login">
+                <button type="button" className="btn btn-primary">
+                  Login
+                </button>
+              </Link>
+            </div>
+          )}
+
           <div className="mx-2">
-            <Link to="/add-book">
+            <Link style={{ cursor: "default" }} to="/add-book">
               <button
                 disabled={role === "visitor" ? true : false}
                 type="button"
@@ -74,7 +84,7 @@ const BooksView = () => {
           >
             {books &&
               books.map((book, index) => {
-                const { id, title, author, describtion } = book;
+                const { id, title, author, description } = book;
                 return (
                   <div key={id} className="col-lg-4 col-md-6 col-sm-12">
                     <div className="card " style={{ margin: "10px 10px" }}>
@@ -84,15 +94,17 @@ const BooksView = () => {
                           {author}
                         </h6>
 
-                        <p className="card-text">{describtion}</p>
+                        <p className="card-text">{description}</p>
 
                         <Link
                           to="/edit-book"
-                          state={{ id, title, author, describtion }}
+                          state={{ id, title, author, description }}
+                          style={{ cursor: "default" }}
                         >
                           <button
                             type="button"
-                            className="btn btn-primary me-2"
+                            className="btn btn-primary me-2 "
+                            disabled={role === "visitor" ? true : false}
                           >
                             Edit
                           </button>

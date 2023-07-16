@@ -9,12 +9,12 @@ const EditBook = () => {
   const [id] = useState(location.state.id);
   const [title, setTitle] = useState(location.state.title);
   const [author, setAuthor] = useState(location.state.author);
-  const [describtion, setDescribtion] = useState(location.state.describtion);
+  const [description, setDescription] = useState(location.state.description);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateBook({ id, title, author, describtion }));
+    dispatch(updateBook({ id, title, author, description }));
     navigate("/", { replace: true });
   };
   return (
@@ -57,15 +57,15 @@ const EditBook = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="describtion" className="form-label">
-            Describtion:
+          <label htmlFor="description" className="form-label">
+            description:
           </label>
           <input
             type="text"
             className="form-control"
-            id="describtion"
-            value={describtion}
-            onChange={(e) => setDescribtion(e.target.value)}
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>

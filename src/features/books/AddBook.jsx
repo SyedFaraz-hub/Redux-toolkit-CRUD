@@ -9,11 +9,11 @@ const AddBook = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [describtion, setDescribtion] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const book = { id: uuidv4(), title, author, describtion };
+    const book = { id: uuidv4(), title, author, description };
     dispatch(addBook(book));
     navigate("/", { replace: true });
   };
@@ -23,7 +23,7 @@ const AddBook = () => {
         className="text-center text-uppercase m-5"
         style={{ letterSpacing: "5px", fontWeight: "ligher" }}
       >
-        Add Book
+        Add Article
       </h2>
       <form
         onSubmit={handleSubmit}
@@ -58,14 +58,14 @@ const AddBook = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="author" className="form-label">
-            Describtion:
+            Description:
           </label>
           <input
             type="text"
             className="form-control"
-            id="describtion"
-            value={describtion}
-            onChange={(e) => setDescribtion(e.target.value)}
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>
@@ -75,7 +75,7 @@ const AddBook = () => {
           className="btn btn-primary"
           style={{ color: "white" }}
         >
-          Add Book
+          Add Article
         </button>
       </form>
     </div>
